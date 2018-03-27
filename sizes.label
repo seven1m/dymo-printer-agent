@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DieCutLabel Version="8.0" Units="twips" MediaType="Default">
+  <PaperOrientation>Landscape</PaperOrientation>
+  <Id>LW_DURABLE_25X89mm</Id>
+  <PaperName>1933081 Drbl 1 x 3-1/2 in</PaperName>
+  <DrawCommands>
+    <RoundRectangle X="0" Y="0" Width="1440" Height="5040" Rx="90.70866" Ry="90.70866"/>
+  </DrawCommands>
+  <ObjectInfo>
+    <TextObject>
+      <Name>TEXT</Name>
+      <ForeColor Alpha="255" Red="209" Green="25" Blue="34"/>
+      <BackColor Alpha="0" Red="255" Green="255" Blue="255"/>
+      <LinkedObjectName></LinkedObjectName>
+      <Rotation>Rotation0</Rotation>
+      <IsMirrored>False</IsMirrored>
+      <IsVariable>False</IsVariable>
+      <HorizontalAlignment>Left</HorizontalAlignment>
+      <VerticalAlignment>Middle</VerticalAlignment>
+      <TextFitMode>AlwaysFit</TextFitMode>
+      <UseFullFontHeight>True</UseFullFontHeight>
+      <Verticalized>False</Verticalized>
+      <StyledText>
+        <Element>
+          <String>72</String>
+          <Attributes>
+            <Font Family="Helvetica" Size="72" Bold="False" Italic="False" Underline="False" Strikeout="False"/>
+            <ForeColor Alpha="255" Red="209" Green="25" Blue="34"/>
+          </Attributes>
+        </Element>
+        <Element>
+          <String>48</String>
+          <Attributes>
+            <Font Family="Helvetica" Size="48" Bold="False" Italic="False" Underline="False" Strikeout="False"/>
+            <ForeColor Alpha="255" Red="209" Green="25" Blue="34"/>
+          </Attributes>
+        </Element>
+        <Element>
+          <String>36</String>
+          <Attributes>
+            <Font Family="Helvetica" Size="36" Bold="False" Italic="False" Underline="False" Strikeout="False"/>
+            <ForeColor Alpha="255" Red="209" Green="25" Blue="34"/>
+          </Attributes>
+        </Element>
+        <Element>
+          <String>24</String>
+          <Attributes>
+            <Font Family="Helvetica" Size="24" Bold="False" Italic="False" Underline="False" Strikeout="False"/>
+            <ForeColor Alpha="255" Red="209" Green="25" Blue="34"/>
+          </Attributes>
+        </Element>
+        <Element>
+          <String>18</String>
+          <Attributes>
+            <Font Family="Helvetica" Size="18" Bold="False" Italic="False" Underline="False" Strikeout="False"/>
+            <ForeColor Alpha="255" Red="209" Green="25" Blue="34"/>
+          </Attributes>
+        </Element>
+        <Element>
+          <String>1414</String>
+          <Attributes>
+            <Font Family="Helvetica" Size="14" Bold="False" Italic="False" Underline="False" Strikeout="False"/>
+            <ForeColor Alpha="255" Red="209" Green="25" Blue="34"/>
+          </Attributes>
+        </Element>
+        <Element>
+          <String>1010</String>
+          <Attributes>
+            <Font Family="Helvetica" Size="10" Bold="False" Italic="False" Underline="False" Strikeout="False"/>
+            <ForeColor Alpha="255" Red="209" Green="25" Blue="34"/>
+          </Attributes>
+        </Element>
+        <Element>
+          <String>77777</String>
+          <Attributes>
+            <Font Family="Helvetica" Size="7" Bold="False" Italic="False" Underline="False" Strikeout="False"/>
+            <ForeColor Alpha="255" Red="209" Green="25" Blue="34"/>
+          </Attributes>
+        </Element>
+      </StyledText>
+    </TextObject>
+    <Bounds X="330" Y="72" Width="4620" Height="1296"/>
+  </ObjectInfo>
+  <ObjectInfo>
+    <TextObject>
+      <Name>TEXT_1</Name>
+      <ForeColor Alpha="255" Red="114" Green="138" Blue="4"/>
+      <BackColor Alpha="0" Red="255" Green="255" Blue="255"/>
+      <LinkedObjectName></LinkedObjectName>
+      <Rotation>Rotation0</Rotation>
+      <IsMirrored>False</IsMirrored>
+      <IsVariable>False</IsVariable>
+      <HorizontalAlignment>Left</HorizontalAlignment>
+      <VerticalAlignment>Middle</VerticalAlignment>
+      <TextFitMode>ShrinkToFit</TextFitMode>
+      <UseFullFontHeight>True</UseFullFontHeight>
+      <Verticalized>False</Verticalized>
+      <StyledText>
+        <Element>
+          <String>top right</String>
+          <Attributes>
+            <Font Family="Helvetica" Size="13" Bold="False" Italic="False" Underline="False" Strikeout="False"/>
+            <ForeColor Alpha="255" Red="114" Green="138" Blue="4"/>
+          </Attributes>
+        </Element>
+      </StyledText>
+    </TextObject>
+    <Bounds X="3916.708" Y="72" Width="1033.292" Height="373.8765"/>
+  </ObjectInfo>
+  <ObjectInfo>
+    <TextObject>
+      <Name>TEXT_2</Name>
+      <ForeColor Alpha="255" Red="110" Green="138" Blue="4"/>
+      <BackColor Alpha="0" Red="255" Green="255" Blue="255"/>
+      <LinkedObjectName></LinkedObjectName>
+      <Rotation>Rotation0</Rotation>
+      <IsMirrored>False</IsMirrored>
+      <IsVariable>False</IsVariable>
+      <HorizontalAlignment>Left</HorizontalAlignment>
+      <VerticalAlignment>Middle</VerticalAlignment>
+      <TextFitMode>ShrinkToFit</TextFitMode>
+      <UseFullFontHeight>True</UseFullFontHeight>
+      <Verticalized>False</Verticalized>
+      <StyledText>
+        <Element>
+          <String>bottom right</String>
+          <Attributes>
+            <Font Family="Helvetica" Size="13" Bold="False" Italic="False" Underline="False" Strikeout="False"/>
+            <ForeColor Alpha="255" Red="110" Green="138" Blue="4"/>
+          </Attributes>
+        </Element>
+      </StyledText>
+    </TextObject>
+    <Bounds X="3487.075" Y="973.3122" Width="1462.925" Height="394.6878"/>
+  </ObjectInfo>
+  <ObjectInfo>
+    <TextObject>
+      <Name>TEXT_3</Name>
+      <ForeColor Alpha="255" Red="112" Green="136" Blue="8"/>
+      <BackColor Alpha="0" Red="255" Green="255" Blue="255"/>
+      <LinkedObjectName></LinkedObjectName>
+      <Rotation>Rotation0</Rotation>
+      <IsMirrored>False</IsMirrored>
+      <IsVariable>False</IsVariable>
+      <HorizontalAlignment>Left</HorizontalAlignment>
+      <VerticalAlignment>Middle</VerticalAlignment>
+      <TextFitMode>ShrinkToFit</TextFitMode>
+      <UseFullFontHeight>True</UseFullFontHeight>
+      <Verticalized>False</Verticalized>
+      <StyledText>
+        <Element>
+          <String>top left</String>
+          <Attributes>
+            <Font Family="Helvetica" Size="13" Bold="False" Italic="False" Underline="False" Strikeout="False"/>
+            <ForeColor Alpha="255" Red="112" Green="136" Blue="8"/>
+          </Attributes>
+        </Element>
+      </StyledText>
+    </TextObject>
+    <Bounds X="330" Y="72" Width="1077.135" Height="370.6563"/>
+  </ObjectInfo>
+  <ObjectInfo>
+    <TextObject>
+      <Name>TEXT_4</Name>
+      <ForeColor Alpha="255" Red="107" Green="138" Blue="5"/>
+      <BackColor Alpha="0" Red="255" Green="255" Blue="255"/>
+      <LinkedObjectName></LinkedObjectName>
+      <Rotation>Rotation0</Rotation>
+      <IsMirrored>False</IsMirrored>
+      <IsVariable>False</IsVariable>
+      <HorizontalAlignment>Left</HorizontalAlignment>
+      <VerticalAlignment>Middle</VerticalAlignment>
+      <TextFitMode>ShrinkToFit</TextFitMode>
+      <UseFullFontHeight>True</UseFullFontHeight>
+      <Verticalized>False</Verticalized>
+      <StyledText>
+        <Element>
+          <String>bottom left</String>
+          <Attributes>
+            <Font Family="Helvetica" Size="13" Bold="False" Italic="False" Underline="False" Strikeout="False"/>
+            <ForeColor Alpha="255" Red="107" Green="138" Blue="5"/>
+          </Attributes>
+        </Element>
+      </StyledText>
+    </TextObject>
+    <Bounds X="330" Y="988.6232" Width="1407.387" Height="379.3768"/>
+  </ObjectInfo>
+</DieCutLabel>

@@ -2,6 +2,7 @@ require 'bundler/setup'
 require 'sinatra'
 require 'thin'
 require 'builder'
+require 'prawn'
 
 class MyThinBackend < ::Thin::Backends::TcpServer
   def initialize(host, port, options)
@@ -60,3 +61,19 @@ get '/DYMO/DLS/Printing/GetPrinters' do
   headers 'Access-Control-Allow-Origin' => '*'
   xml.to_s
 end
+
+post '/DYMO/DLS/Printing/PrintLabel' do
+  # printerName "DYMO_LabelWriter_450_Turbo"
+  # printParamsXml "<LabelWriterPrintParams><Copies>1</Copies><PrintQuality>Text</PrintQuality><TwinTurboRoll>Auto</TwinTurboRoll></LabelWriterPrintParams>"
+  # labelXml
+  # labelSetXml
+  path = File.expand_path('../out.pdf', __FILE__)
+  Prawn::Document.generate(path, page_size: [81, 252]) do
+    text "Hello There"
+  end
+  puts `lpr -P #{params[:printerName]} #{path}`
+  content_type 'application/json'
+  headers 'Access-Control-Allow-Origin' => '*'
+  'true'
+end
+
