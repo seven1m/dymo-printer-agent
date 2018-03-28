@@ -2,10 +2,15 @@ GEM
   remote: https://rubygems.org/
   specs:
     builder (3.2.3)
+    cairo (1.15.12)
+      native-package-installer (>= 1.0.3)
+      pkg-config (>= 1.2.2)
     daemons (1.2.6)
     eventmachine (1.2.5)
     mustermann (1.0.2)
+    native-package-installer (1.0.6)
     pdf-core (0.7.0)
+    pkg-config (1.2.9)
     prawn (2.2.2)
       pdf-core (~> 0.7.0)
       ttfunk (~> 1.5)
@@ -29,9 +34,10 @@ PLATFORMS
 
 DEPENDENCIES
   builder
+  cairo
   prawn
   sinatra
   thin
 
 BUNDLED WITH
-   1.15.4
+   1.16.1

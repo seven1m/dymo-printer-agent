@@ -1,0 +1,3 @@
+watch('factors.rb') do
+  puts `ruby factors.rb`
+end
