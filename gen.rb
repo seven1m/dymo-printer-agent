@@ -33,6 +33,12 @@ Prawn::Document.generate(path, page_size: paper_size, margin: [0, 0, 0, 0]) do
     y = paper_size.last - (bounds['Y'].value.to_i / TWIP * PDF_POINT)
     go_to_page 1
     if (text_object = object.css('TextObject').first)
+      foreground = text_object.css('ForeColor').first
+      color = Prawn::Graphics::Color.rgb2hex([
+        foreground.attributes['Red'].value.to_i,
+        foreground.attributes['Green'].value.to_i,
+        foreground.attributes['Blue'].value.to_i
+      ])
       if (background = text_object.css('BackColor').first)
         alpha = background.attributes['Alpha'].value.to_i
         if alpha > 0
@@ -74,7 +80,7 @@ Prawn::Document.generate(path, page_size: paper_size, margin: [0, 0, 0, 0]) do
       y -= 3 # simulate vertical padding
       begin
         text_box(
-          '<color rgb="5ecede">' + elements.join + '</color>',
+          "<color rgb='#{color}'>#{elements.join}</color>",
           at: [x, y],
           width: width,
           height: height,
@@ -82,11 +88,19 @@ Prawn::Document.generate(path, page_size: paper_size, margin: [0, 0, 0, 0]) do
           inline_format: true,
           align: align,
           valign: valign,
-          #disable_wrap_by_char: true,
           single_line: !verticalized
         )
       rescue Prawn::Errors::CannotFit
         puts 'cannot fit'
+      end
+    elsif (shape_object = object.css('ShapeObject').first)
+      case shape_object.css('ShapeType').first.text
+      when 'HorizontalLine'
+        line_width height
+        horizontal_line x, x + width, at: y
+        stroke
+      else
+        puts 'unknown shape type'
       end
     else
       puts 'unsupported object type'
