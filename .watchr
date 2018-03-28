@@ -1,4 +1,5 @@
 watch('gen.rb') do
-  puts `ruby gen.rb sizes.label`
+  puts '------------------'
+  puts `ruby gen.rb sample_nametag.label`
   puts 'done'
 end

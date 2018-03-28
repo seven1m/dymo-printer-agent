@@ -17,20 +17,20 @@
       <IsVariable>False</IsVariable>
       <HorizontalAlignment>Left</HorizontalAlignment>
       <VerticalAlignment>Top</VerticalAlignment>
-      <TextFitMode>ShrinkToFit</TextFitMode>
+      <TextFitMode>None</TextFitMode>
       <UseFullFontHeight>True</UseFullFontHeight>
       <Verticalized>False</Verticalized>
       <StyledText>
         <Element>
           <String>Owen</String>
           <Attributes>
-            <Font Family="Arial" Size="22" Bold="False" Italic="False" Underline="False" Strikeout="False"/>
+            <Font Family="Arial" Size="24" Bold="False" Italic="False" Underline="False" Strikeout="False"/>
             <ForeColor Alpha="255" Red="0" Green="0" Blue="0"/>
           </Attributes>
         </Element>
       </StyledText>
     </TextObject>
-    <Bounds X="331" Y="150" Width="1923.539" Height="515.2247"/>
+    <Bounds X="331.2" Y="74.97202" Width="1923.539" Height="501.6015"/>
   </ObjectInfo>
   <ObjectInfo>
     <TextObject>
@@ -43,7 +43,7 @@
       <IsVariable>False</IsVariable>
       <HorizontalAlignment>Left</HorizontalAlignment>
       <VerticalAlignment>Top</VerticalAlignment>
-      <TextFitMode>ShrinkToFit</TextFitMode>
+      <TextFitMode>None</TextFitMode>
       <UseFullFontHeight>True</UseFullFontHeight>
       <Verticalized>False</Verticalized>
       <StyledText>
@@ -56,7 +56,7 @@
         </Element>
       </StyledText>
     </TextObject>
-    <Bounds X="331" Y="597.809" Width="3960" Height="615"/>
+    <Bounds X="331.2" Y="597.809" Width="3960" Height="615"/>
   </ObjectInfo>
   <ObjectInfo>
     <TextObject>
@@ -69,20 +69,20 @@
       <IsVariable>False</IsVariable>
       <HorizontalAlignment>Left</HorizontalAlignment>
       <VerticalAlignment>Top</VerticalAlignment>
-      <TextFitMode>ShrinkToFit</TextFitMode>
+      <TextFitMode>None</TextFitMode>
       <UseFullFontHeight>True</UseFullFontHeight>
       <Verticalized>False</Verticalized>
       <StyledText>
         <Element>
           <String>Allergic to nuts</String>
           <Attributes>
-            <Font Family="Arial" Size="11" Bold="False" Italic="False" Underline="False" Strikeout="False"/>
+            <Font Family="Arial" Size="9" Bold="False" Italic="False" Underline="False" Strikeout="False"/>
             <ForeColor Alpha="255" Red="0" Green="0" Blue="0"/>
           </Attributes>
         </Element>
       </StyledText>
     </TextObject>
-    <Bounds X="331" Y="1223" Width="2520" Height="255"/>
+    <Bounds X="331.2" Y="1223" Width="2520" Height="255"/>
   </ObjectInfo>
   <ObjectInfo>
     <TextObject>
@@ -95,7 +95,7 @@
       <IsVariable>False</IsVariable>
       <HorizontalAlignment>Center</HorizontalAlignment>
       <VerticalAlignment>Top</VerticalAlignment>
-      <TextFitMode>ShrinkToFit</TextFitMode>
+      <TextFitMode>None</TextFitMode>
       <UseFullFontHeight>True</UseFullFontHeight>
       <Verticalized>True</Verticalized>
       <StyledText>
@@ -121,14 +121,14 @@
       <IsVariable>False</IsVariable>
       <HorizontalAlignment>Right</HorizontalAlignment>
       <VerticalAlignment>Top</VerticalAlignment>
-      <TextFitMode>ShrinkToFit</TextFitMode>
+      <TextFitMode>None</TextFitMode>
       <UseFullFontHeight>True</UseFullFontHeight>
       <Verticalized>False</Verticalized>
       <StyledText>
         <Element>
           <String>7/9 @ 9:00 a.m.</String>
           <Attributes>
-            <Font Family="Arial" Size="11" Bold="False" Italic="False" Underline="False" Strikeout="False"/>
+            <Font Family="Arial" Size="9" Bold="False" Italic="False" Underline="False" Strikeout="False"/>
             <ForeColor Alpha="255" Red="0" Green="0" Blue="0"/>
           </Attributes>
         </Element>
@@ -147,14 +147,14 @@
       <IsVariable>False</IsVariable>
       <HorizontalAlignment>Right</HorizontalAlignment>
       <VerticalAlignment>Top</VerticalAlignment>
-      <TextFitMode>ShrinkToFit</TextFitMode>
+      <TextFitMode>None</TextFitMode>
       <UseFullFontHeight>True</UseFullFontHeight>
       <Verticalized>False</Verticalized>
       <StyledText>
         <Element>
           <String>Tim Morgan</String>
           <Attributes>
-            <Font Family="Arial" Size="11" Bold="False" Italic="False" Underline="False" Strikeout="False"/>
+            <Font Family="Arial" Size="7" Bold="False" Italic="False" Underline="False" Strikeout="False"/>
             <ForeColor Alpha="255" Red="0" Green="0" Blue="0"/>
           </Attributes>
         </Element>
@@ -173,14 +173,14 @@
       <IsVariable>False</IsVariable>
       <HorizontalAlignment>Right</HorizontalAlignment>
       <VerticalAlignment>Top</VerticalAlignment>
-      <TextFitMode>ShrinkToFit</TextFitMode>
+      <TextFitMode>None</TextFitMode>
       <UseFullFontHeight>True</UseFullFontHeight>
       <Verticalized>False</Verticalized>
       <StyledText>
         <Element>
           <String>(123) 456-7890</String>
           <Attributes>
-            <Font Family="Arial" Size="11" Bold="False" Italic="False" Underline="False" Strikeout="False"/>
+            <Font Family="Arial" Size="7" Bold="False" Italic="False" Underline="False" Strikeout="False"/>
             <ForeColor Alpha="255" Red="0" Green="0" Blue="0"/>
           </Attributes>
         </Element>
