@@ -45,11 +45,14 @@ Prawn::Document.generate(path, page_size: paper_size, margin: [0, 0, 0, 0]) do
           fill
         end
       end
+      verticalized = text_object.css('Verticalized').first
+      verticalized = verticalized && verticalized.text == 'True'
       elements = text_object.css('StyledText Element').map do |element|
         font = element.css('Attributes Font').first
         font_family = FONTS[font.attributes['Family'].value] || 'Helvetica'
         size = font.attributes['Size'].value.to_i
         string = element.css('String').first.text
+        string = string.each_char.map { |c| [c, "\n"] }.flatten.join if verticalized
         escaped_string = string.gsub('<', '&lt;').gsub('>', '&gt;')
         spacing = 0
         %(<font name="#{font_family}" character_spacing="#{spacing}" size="#{size}">#{escaped_string}</font>)
@@ -80,7 +83,7 @@ Prawn::Document.generate(path, page_size: paper_size, margin: [0, 0, 0, 0]) do
           align: align,
           valign: valign,
           #disable_wrap_by_char: true,
-          single_line: true
+          single_line: !verticalized
         )
       rescue Prawn::Errors::CannotFit
         puts 'cannot fit'
