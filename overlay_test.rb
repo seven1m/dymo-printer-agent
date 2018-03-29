@@ -16,7 +16,7 @@ require_relative './renderer'
 
 (label_filename, pdf_filename, out_filename, overlay_filename) = ARGV
 
-out = Renderer.new(File.read(label_filename)).render
+out = Renderer.new(xml: File.read(label_filename), params: {}).render
 File.write(out_filename, out)
 
 actual = CombinePDF.load(out_filename).pages[0]
