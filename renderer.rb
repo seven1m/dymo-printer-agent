@@ -1,18 +1,6 @@
 require 'prawn'
 require 'nokogiri'
 
-module FormattedBoxDescenderFix
-  # On bottom-aligned boxes, Dymo seems to count the height of character descenders.
-  # Let's hack Prawn to do the same.
-
-  def process_vertical_alignment(text)
-    super
-    @at[1] += @descender if @vertical_align == :bottom
-  end
-end
-
-Prawn::Text::Formatted::Box.prepend(FormattedBoxDescenderFix)
-
 class Renderer
   # 1440 twips per inch (20 per PDF point)
   TWIP = 1440.0
@@ -93,11 +81,11 @@ class Renderer
       string = string.each_char.map { |c| [c, "\n"] }.flatten.join if verticalized
       string
     end
-    y -= 3 # everything seems to be shifted down by about 3 points with Dymo
+    valign = valign_from_text_object(text_object)
     begin
       pdf.fill_color color
       pdf.font font_family
-      pdf.text_box(
+      (box, actual_size) = text_box_with_font_size(
         strings.join,
         size: size,
         at: [x, y],
@@ -105,13 +93,25 @@ class Renderer
         height: height,
         overflow: overflow_from_text_object(text_object),
         align: align_from_text_object(text_object),
-        valign: valign_from_text_object(text_object),
+        valign: valign,
         disable_wrap_by_char: true,
         single_line: !verticalized
       )
+      # fix some line height issues by shift the box down by 0.4 of the font point size
+      box.at[1] -= (actual_size * 0.4)
+      # on bottom-aligned boxes, Dymo counts the height of character descenders
+      box.at[1] += box.descender if valign == :bottom
+      box.render
     rescue Prawn::Errors::CannotFit
       puts 'cannot fit'
     end
+  end
+
+  def text_box_with_font_size(text, options = {})
+    box = Prawn::Text::Box.new(text, options.merge(document: pdf))
+    box.render(dry_run: true)
+    size = box.instance_eval { @font_size }
+    [box, size]
   end
 
   def draw_rectangle_from_object(text_object, x, y, width, height)
