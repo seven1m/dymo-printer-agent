@@ -27,11 +27,11 @@ sent directly to the Dymo print driver.
 
 ### What's Quirky
 
-Some text is not placed exactly right. Dymo seems to have some inconsistent line spacing, kerning,
-margins, and other alignment issues that haven't been fully imitated.
+Some text is not placed exactly the same with this app as Dymo would do it. Dymo and Prawn have very subtle
+differences in how they place text, space characters, and auto-fit text. Some of those differences have been
+accounted for, but not all.
 
-If your labels rely on precise, pixel-perfect placement/alignment of different objects,
-this solution may not work well for you.
+If your labels rely on precise placement/alignment of different objects, this solution may not work well for you.
 
 Below are some samples:
 
