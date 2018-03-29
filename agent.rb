@@ -2,7 +2,8 @@ require 'bundler/setup'
 require 'sinatra'
 require 'thin'
 require 'builder'
-require 'prawn'
+require 'nokogiri'
+require_relative './renderer'
 
 class MyThinBackend < ::Thin::Backends::TcpServer
   def initialize(host, port, options)
@@ -63,15 +64,15 @@ get '/DYMO/DLS/Printing/GetPrinters' do
 end
 
 post '/DYMO/DLS/Printing/PrintLabel' do
-  # printerName "DYMO_LabelWriter_450_Turbo"
-  # printParamsXml "<LabelWriterPrintParams><Copies>1</Copies><PrintQuality>Text</PrintQuality><TwinTurboRoll>Auto</TwinTurboRoll></LabelWriterPrintParams>"
-  # labelXml
-  # labelSetXml
-  path = File.expand_path('../out.pdf', __FILE__)
-  Prawn::Document.generate(path, page_size: [81, 252]) do
-    text "Hello There"
+  label_xml = params[:labelXml]
+  details = Nokogiri::XML(params[:labelSetXml])
+  details.css('LabelRecord').each do |label|
+    record_params = Hash[label.css('ObjectData').map { |d| [d.attributes['Name'].value, d.text] }]
+    result = Renderer.new(xml: label_xml, params: record_params).render
+    path = File.expand_path('out.pdf', __dir__)
+    File.write(path, result)
+    puts `lpr -P #{params[:printerName]} #{path}`
   end
-  puts `lpr -P #{params[:printerName]} #{path}`
   content_type 'application/json'
   headers 'Access-Control-Allow-Origin' => '*'
   'true'

@@ -21,9 +21,10 @@ class Renderer
     'Arial' => 'Helvetica'
   }.freeze
 
-  def initialize(label_xml)
-    @label_xml = label_xml
-    @doc = Nokogiri::XML(label_xml)
+  def initialize(xml:, params:)
+    @xml = xml
+    @params = params
+    @doc = Nokogiri::XML(xml)
   end
 
   def render
@@ -40,7 +41,8 @@ class Renderer
   attr_reader :doc, :pdf
 
   def paper_size
-    SIZES[doc.css('PaperName').first.text] || SIZES.values.first
+    elm = doc.css('PaperName').first
+    elm && SIZES[elm.text] || SIZES.values.first
   end
 
   def build_pdf
@@ -68,8 +70,10 @@ class Renderer
     draw_rectangle_from_object(text_object, x, y, width, height)
     verticalized = text_object.css('Verticalized').first
     verticalized &&= verticalized.text == 'True'
+    name = text_object.css('Name').first
+    name &&= name.text
     elements = text_object.css('StyledText Element').map do |element|
-      styled_text_element_to_formatted_strings(element, verticalized: verticalized)
+      styled_text_element_to_formatted_strings(element, name: name, verticalized: verticalized)
     end
     y -= 3 # simulate vertical padding
     begin
@@ -106,11 +110,11 @@ class Renderer
     Prawn::Graphics::Color.rgb2hex([red, green, blue])
   end
 
-  def styled_text_element_to_formatted_strings(element, verticalized: false)
+  def styled_text_element_to_formatted_strings(element, name:, verticalized: false)
     font = element.css('Attributes Font').first
     font_family = FONTS[font.attributes['Family'].value] || 'Helvetica'
     size = font.attributes['Size'].value.to_i
-    string = element.css('String').first.text
+    string = @params[name] || element.css('String').first.text
     string = string.each_char.map { |c| [c, "\n"] }.flatten.join if verticalized
     escaped_string = string.gsub('<', '&lt;').gsub('>', '&gt;')
     spacing = 0
