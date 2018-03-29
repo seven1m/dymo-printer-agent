@@ -14,7 +14,7 @@ TODO: write intro
 
     ```
     scp dist/planning-center-check-ins-*-armv7l.tar.xz pi@raspberry.local:~/
-    ssh pi@raspberry.local "tar xJf planning-center-check-ins-*-armv7l.tar.xz
+    ssh pi@raspberry.local "tar xJf planning-center-check-ins-*-armv7l.tar.xz"
     ```
 
 1.  On the Raspberry Pi, run the Electron app at:
