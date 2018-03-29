@@ -3,6 +3,6 @@
 
 watch('renderer.rb') do
   puts '------------------'
-  puts `ruby overlay_test.rb sample_nametag.label sample_nametag.pdf out.pdf sample_nametag_overlay.pdf`
+  puts `ruby overlay_test.rb samples/nametag.label samples/nametag.pdf out.pdf nametag_overlay.pdf`
   puts 'done'
 end
