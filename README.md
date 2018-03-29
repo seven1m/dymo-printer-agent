@@ -37,6 +37,7 @@ Below are some samples:
 
 * [Printed via the Dymo app](https://github.com/ministrycentered/check-ins-rpi-printer/blob/master/samples/dymo.png)
 * [Printed via this Ruby app](https://github.com/ministrycentered/check-ins-rpi-printer/blob/master/samples/us.png)
+* [Both images combined](https://github.com/ministrycentered/check-ins-rpi-printer/blob/master/samples/overlay.png)
 
 ## Setup
 
