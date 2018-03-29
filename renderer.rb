@@ -160,11 +160,13 @@ class Renderer
     OVERFLOWS[text_object.css('TextFitMode').first.text] || :truncate
   end
 
+  HORIZONTAL_LINE_VERTICAL_FUDGE_BY = -2.5
+
   def render_shape_object(shape_object, x, y, width, height)
     case shape_object.css('ShapeType').first.text
     when 'HorizontalLine'
       pdf.line_width height
-      pdf.horizontal_line x, x + width, at: y
+      pdf.horizontal_line x, x + width, at: y + HORIZONTAL_LINE_VERTICAL_FUDGE_BY
       pdf.stroke
     else
       puts 'unknown shape type'
