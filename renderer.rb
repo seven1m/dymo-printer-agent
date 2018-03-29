@@ -2,6 +2,8 @@ require 'prawn'
 require 'nokogiri'
 
 class Renderer
+  FONT_DIR = RUBY_PLATFORM =~ /darwin/ ? '/Library/Fonts' : '/usr/share/fonts'
+
   # 1440 twips per inch (20 per PDF point)
   TWIP = 1440.0
 
@@ -15,11 +17,6 @@ class Renderer
 
   # This may be needed for some label types. Zero for now.
   LEFT_MARGIN = 0
-
-  # TODO: translate more font names here
-  FONTS = {
-    'Arial' => 'Helvetica'
-  }.freeze
 
   def initialize(xml:, params:)
     @xml = xml
@@ -74,7 +71,7 @@ class Renderer
     name &&= name.text
     elements = text_object.css('StyledText Element')
     font = elements.first.css('Attributes Font').first
-    font_family = FONTS[font.attributes['Family'].value] || 'Helvetica'
+    font_family = font ? font.attributes['Family'].value : 'Helvetica'
     size = font.attributes['Size'].value.to_i
     strings = elements.map do |element|
       string = @params[name] || element.css('String').first.text
@@ -84,7 +81,7 @@ class Renderer
     valign = valign_from_text_object(text_object)
     begin
       pdf.fill_color color
-      pdf.font font_family
+      pdf.font File.join(FONT_DIR, font_family + '.ttf')
       (box, actual_size) = text_box_with_font_size(
         strings.join,
         size: size,
