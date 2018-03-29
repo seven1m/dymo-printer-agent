@@ -56,7 +56,7 @@
         </Element>
       </StyledText>
     </TextObject>
-    <Bounds X="331.2" Y="597.809" Width="3960" Height="615"/>
+    <Bounds X="331.2" Y="581.6541" Width="3960" Height="615"/>
   </ObjectInfo>
   <ObjectInfo>
     <TextObject>
@@ -126,15 +126,15 @@
       <Verticalized>False</Verticalized>
       <StyledText>
         <Element>
-          <String>7/9 @ 9:00 a.m.</String>
+          <String>Wed. Mar. 28 @ 9:00 a.m.</String>
           <Attributes>
-            <Font Family="Arial" Size="9" Bold="False" Italic="False" Underline="False" Strikeout="False"/>
+            <Font Family="Arial" Size="7" Bold="False" Italic="False" Underline="False" Strikeout="False"/>
             <ForeColor Alpha="255" Red="0" Green="0" Blue="0"/>
           </Attributes>
         </Element>
       </StyledText>
     </TextObject>
-    <Bounds X="2611" Y="203" Width="1710" Height="255"/>
+    <Bounds X="2187.074" Y="203" Width="2133.926" Height="255"/>
   </ObjectInfo>
   <ObjectInfo>
     <TextObject>
