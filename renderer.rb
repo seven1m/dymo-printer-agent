@@ -1,6 +1,18 @@
 require 'prawn'
 require 'nokogiri'
 
+module FormattedBoxDescenderFix
+  # On bottom-aligned boxes, Dymo seems to count the height of character descenders.
+  # Let's hack Prawn to do the same.
+
+  def process_vertical_alignment(text)
+    super
+    @at[1] += @descender if @vertical_align == :bottom
+  end
+end
+
+Prawn::Text::Formatted::Box.prepend(FormattedBoxDescenderFix)
+
 class Renderer
   # 1440 twips per inch (20 per PDF point)
   TWIP = 1440.0
@@ -72,20 +84,29 @@ class Renderer
     verticalized &&= verticalized.text == 'True'
     name = text_object.css('Name').first
     name &&= name.text
-    elements = text_object.css('StyledText Element').map do |element|
-      styled_text_element_to_formatted_strings(element, name: name, verticalized: verticalized)
+    elements = text_object.css('StyledText Element')
+    font = elements.first.css('Attributes Font').first
+    font_family = FONTS[font.attributes['Family'].value] || 'Helvetica'
+    size = font.attributes['Size'].value.to_i
+    strings = elements.map do |element|
+      string = @params[name] || element.css('String').first.text
+      string = string.each_char.map { |c| [c, "\n"] }.flatten.join if verticalized
+      string
     end
-    y -= 3 # simulate vertical padding
+    y -= 3 # everything seems to be shifted down by about 3 points with Dymo
     begin
+      pdf.fill_color color
+      pdf.font font_family
       pdf.text_box(
-        "<color rgb='#{color}'>#{elements.join}</color>",
+        strings.join,
+        size: size,
         at: [x, y],
         width: width,
         height: height,
         overflow: overflow_from_text_object(text_object),
-        inline_format: true,
         align: align_from_text_object(text_object),
         valign: valign_from_text_object(text_object),
+        disable_wrap_by_char: true,
         single_line: !verticalized
       )
     rescue Prawn::Errors::CannotFit
@@ -110,17 +131,6 @@ class Renderer
     Prawn::Graphics::Color.rgb2hex([red, green, blue])
   end
 
-  def styled_text_element_to_formatted_strings(element, name:, verticalized: false)
-    font = element.css('Attributes Font').first
-    font_family = FONTS[font.attributes['Family'].value] || 'Helvetica'
-    size = font.attributes['Size'].value.to_i
-    string = @params[name] || element.css('String').first.text
-    string = string.each_char.map { |c| [c, "\n"] }.flatten.join if verticalized
-    escaped_string = string.gsub('<', '&lt;').gsub('>', '&gt;')
-    spacing = 0
-    %(<font name="#{font_family}" character_spacing="#{spacing}" size="#{size}">#{escaped_string}</font>)
-  end
-
   VALIGNS = {
     'Top'    => :top,
     'Bottom' => :bottom,
@@ -142,8 +152,8 @@ class Renderer
   end
 
   OVERFLOWS = {
-    'None'      => :truncate,
-    'AlwaysFit' => :shrink_to_fit
+    'None'        => :truncate,
+    'ShrinkToFit' => :shrink_to_fit
   }.freeze
 
   def overflow_from_text_object(text_object)

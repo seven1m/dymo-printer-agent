@@ -16,13 +16,13 @@
       <IsMirrored>False</IsMirrored>
       <IsVariable>False</IsVariable>
       <HorizontalAlignment>Left</HorizontalAlignment>
-      <VerticalAlignment>Top</VerticalAlignment>
-      <TextFitMode>None</TextFitMode>
+      <VerticalAlignment>Bottom</VerticalAlignment>
+      <TextFitMode>ShrinkToFit</TextFitMode>
       <UseFullFontHeight>True</UseFullFontHeight>
       <Verticalized>False</Verticalized>
       <StyledText>
         <Element>
-          <String>Owen</String>
+          <String>A really long first name</String>
           <Attributes>
             <Font Family="Arial" Size="24" Bold="False" Italic="False" Underline="False" Strikeout="False"/>
             <ForeColor Alpha="255" Red="0" Green="0" Blue="0"/>
@@ -48,7 +48,7 @@
       <Verticalized>False</Verticalized>
       <StyledText>
         <Element>
-          <String>Schwerdtfeger</String>
+          <String>Last Name</String>
           <Attributes>
             <Font Family="Tahoma" Size="16" Bold="False" Italic="False" Underline="False" Strikeout="False"/>
             <ForeColor Alpha="255" Red="0" Green="0" Blue="0"/>
