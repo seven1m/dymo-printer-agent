@@ -1,4 +1,37 @@
-TODO: write intro
+_a hacky solution to printing labels to a Dymo printer using a Raspberry Pi_
+
+## What?
+
+The Check-ins app relies on the Dymo tray app widget thing to convert label XML
+into a PDF for the printer. Since the Dymo app doesn't run on Linux, this small Ruby
+app aims to replace it.
+
+This app sets up a small web server on port 41951 and accepts POST requests with XML.
+The XML is interpretted, albeit not perfectly, and rendered to PDF, which is then
+sent directly to the Dymo print driver.
+
+### What Works
+
+* Basic text
+* text box solid background colors
+* Horizontal lines
+* "Verticalized" text
+
+### What Doesn't Work (Yet)
+
+* Auto-shrinking text
+* Rotated text
+* Other shapes
+* Alpha transparency on background colors
+* Probably other stuff
+
+### What's Quirky
+
+Some text is not placed exactly right. Dymo seems to have some inconsistent line spacing, kerning,
+margins, and other alignment issues that haven't been fully imitated.
+
+If your labels rely on precise, pixel-perfect placement/alignment of different objects,
+this solution may not work well for you.
 
 ## Setup
 
