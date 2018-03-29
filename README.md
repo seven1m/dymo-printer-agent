@@ -33,6 +33,11 @@ margins, and other alignment issues that haven't been fully imitated.
 If your labels rely on precise, pixel-perfect placement/alignment of different objects,
 this solution may not work well for you.
 
+Below are some samples:
+
+* [Printed via the Dymo app](https://github.com/ministrycentered/check-ins-rpi-printer/blob/master/samples/dymo.png)
+* [Printed via this Ruby app](https://github.com/ministrycentered/check-ins-rpi-printer/blob/master/samples/us.png)
+
 ## Setup
 
 1.  Build the Check-ins Electron app on your Mac:
