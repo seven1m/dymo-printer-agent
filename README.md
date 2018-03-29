@@ -13,7 +13,7 @@ sent directly to the Dymo print driver.
 ### What Works
 
 * Basic text
-* text box solid background colors
+* Text box solid background colors
 * Horizontal lines
 * "Verticalized" text
 
