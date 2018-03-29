@@ -12,15 +12,15 @@ sent directly to the Dymo print driver.
 
 ### What Works
 
-* Basic text
+* Basic text and auto-shrinking text
 * Text box solid background colors
 * Horizontal lines
 * "Verticalized" text
 
 ### What Doesn't Work (Yet)
 
-* Auto-shrinking text
 * Rotated text
+* Multiple font sizes/styles in the same text box
 * Other shapes
 * Alpha transparency on background colors
 * Probably other stuff
