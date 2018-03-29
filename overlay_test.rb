@@ -6,7 +6,7 @@
 #
 # Usage:
 #
-#     ruby overlay_test.rb sample_nametag.label sample_nametag.pdf out.pdf sample_nametag_overlay.pdf
+#     ruby overlay_test.rb samples/nametag.label samples/nametag.pdf out.pdf overlay.pdf
 #
 # The final filename will be both the reference PDF and the generated PDF combined,
 # one on top of the other, for comparison.
