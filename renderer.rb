@@ -82,9 +82,13 @@ class Renderer
     begin
       pdf.fill_color color
       pdf.font File.join(FONT_DIR, font_family + '.ttf')
+      # horizontal padding of 1 point
+      x += 1
+      width -= 2
       (box, actual_size) = text_box_with_font_size(
         strings.join,
         size: size,
+        character_spacing: 0,
         at: [x, y],
         width: width,
         height: height,
@@ -94,8 +98,8 @@ class Renderer
         disable_wrap_by_char: true,
         single_line: !verticalized
       )
-      # fix some line height issues by shift the box down by 0.4 of the font point size
-      box.at[1] -= (actual_size * 0.4)
+      # correct vertical alignment to more closely match Dymo -- this gets us close, but not perfect :-(
+      box.at[1] -= 2 + (actual_size * 0.2)
       # on bottom-aligned boxes, Dymo counts the height of character descenders
       box.at[1] += box.descender if valign == :bottom
       box.render
