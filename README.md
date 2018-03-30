@@ -49,17 +49,27 @@ Below are some samples:
     node_modules/.bin/build --linux tar.xz --armv7l
     ```
 
+1.  Enable ssh on the Raspberry Pi and change the default password:
+
+    ```
+    sudo systemctl enable ssh
+    sudo service ssh start
+    passwd
+    ```
+
+    Change the password to something secure.
+
 1.  Copy the Check-ins Electron app to the Raspberry Pi and extract it:
 
     ```
     scp dist/planning-center-check-ins-*-armv7l.tar.xz pi@raspberry.local:~/
-    ssh pi@raspberry.local "tar xJf planning-center-check-ins-*-armv7l.tar.xz"
+    ssh pi@raspberry.local "tar xJf planning-center-check-ins-*-armv7l.tar.xz && mv planning-center-check-ins-*-armv7l planning-center-check-ins"
     ```
 
 1.  On the Raspberry Pi, run the Electron app at:
 
     ```
-    /home/pi/planning-center-check-ins-1.4.1-armv7l/planning-center-check-ins
+    /home/pi/planning-center-check-ins/planning-center-check-ins
     ```
 
     ...and create a new station.
@@ -68,7 +78,7 @@ Below are some samples:
 
     ```
     sudo apt update
-    sudo apt install build-essential openssl ruby-dev libssl-dev cups printer-driver-dymo
+    sudo apt install build-essential openssl ruby-dev libssl-dev cups printer-driver-dymo ttf-mscorefonts-installer
     sudo gpasswd -a pi lpadmin
     ```
 
@@ -91,4 +101,12 @@ Below are some samples:
     ```
     cd check-ins-rpi-printer
     ruby agent.rb
+    ```
+
+1.  Set the software to auto-start:
+
+    ```
+    echo '@/home/pi/check-ins-rpi-printer/start_station.sh' >> ~/.config/lxsession/LXDE-pi/autostart
+    echo '@/home/pi/check-ins-rpi-printer/start_printer_agent.sh' >> ~/.config/lxsession/LXDE-pi/autostart
+    echo '@ruby /home/pi/check-ins-rpi-printer/dymo_speed.rb' >> ~/.config/lxsession/LXDE-pi/autostart
     ```
