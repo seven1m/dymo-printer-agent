@@ -2,7 +2,7 @@ require 'prawn'
 require 'nokogiri'
 
 class Renderer
-  FONT_DIR = RUBY_PLATFORM =~ /darwin/ ? '/Library/Fonts' : '/usr/share/fonts'
+  FONT_DIR = RUBY_PLATFORM =~ /darwin/ ? '/Library/Fonts' : '/usr/share/fonts/truetype/msttcorefonts'
 
   # 1440 twips per inch (20 per PDF point)
   TWIP = 1440.0
