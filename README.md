@@ -1,4 +1,4 @@
-_a hacky solution to printing labels to a Dymo printer using a Raspberry Pi_
+_a reverse-engineered solution to printing labels to a Dymo printer using a Raspberry Pi_
 
 ## What?
 
