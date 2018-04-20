@@ -30,6 +30,10 @@ configure do
   end
 end
 
+get '/' do
+  'it works!'
+end
+
 get '/DYMO/DLS/Printing/StatusConnected' do
   content_type 'application/json'
   headers 'Access-Control-Allow-Origin' => '*'
