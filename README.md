@@ -69,6 +69,12 @@ _These instructions should work on Debian and Ubuntu._
     bundle
     ```
 
+1.  Generate a self-signed certificate:
+
+    ```
+    openssl req -nodes -new -x509 -keyout ca.key -out ca.crt -subj /CN=localhost -days 3650
+    ```
+
 1.  Start the printer agent:
 
     ```
