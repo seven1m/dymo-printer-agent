@@ -1,10 +1,10 @@
-_a reverse-engineered solution to printing labels to a Dymo printer using a Raspberry Pi_
+_print label XML to a Dymo printer on any platform_
 
 ## What?
 
-The Check-ins app relies on the Dymo tray app widget thing to convert label XML
-into a PDF for the printer. Since the Dymo app doesn't run on Linux, this small Ruby
-app aims to replace it.
+The Dymo tray application runs on Windows and Mac, but not Linux. I wanted to be able
+to use the JavaScript SDK to print from a browser on Linux, so I wrote this Ruby program
+to act like the Dymo app.
 
 This app sets up a small web server on port 41951 and accepts POST requests with XML.
 The XML is interpretted, albeit not perfectly, and rendered to PDF, which is then
@@ -17,96 +17,85 @@ sent directly to the Dymo print driver.
 * Horizontal lines
 * "Verticalized" text
 
-### What Doesn't Work (Yet)
+### What Doesn't Work, Yet (Pull Requests Welcome!)
 
 * Rotated text
-* Multiple font sizes/styles in the same text box
 * Other shapes
 * Alpha transparency on background colors
+* Multiple font sizes/styles in the same text box (probably not possible)
 * Probably other stuff
 
 ### What's Quirky
 
 Some text is not placed exactly the same with this app as Dymo would do it. Dymo and Prawn have very subtle
-differences in how they place text, space characters, and auto-fit text. Some of those differences have been
-accounted for, but not all.
+differences in how they render text. Some of those differences have been accounted for, but not all.
 
 If your labels rely on precise placement/alignment of different objects, this solution may not work well for you.
 
 Below are some samples:
 
-* [Printed via the Dymo app](https://github.com/ministrycentered/check-ins-rpi-printer/blob/master/samples/dymo.png)
-* [Printed via this Ruby app](https://github.com/ministrycentered/check-ins-rpi-printer/blob/master/samples/us.png)
-* [Both images combined](https://github.com/ministrycentered/check-ins-rpi-printer/blob/master/samples/overlay.png)
+* [Printed via the Dymo app](https://github.com/seven1m/dymo-printer-agent/blob/master/samples/dymo.png)
+* [Printed via this Ruby app](https://github.com/seven1m/dymo-printer-agent/blob/master/samples/us.png)
+* [Both images combined](https://github.com/seven1m/dymo-printer-agent/blob/master/samples/overlay.png)
 
 ## Setup
 
-1.  Build the Check-ins Electron app on your Mac:
+_These instructions should work on Debian and Ubuntu._
 
-    ```
-    cd check-ins-desktop
-    yarn
-    node_modules/.bin/build --linux tar.xz --armv7l
-    ```
-
-1.  Enable ssh on the Raspberry Pi and change the default password:
-
-    ```
-    sudo systemctl enable ssh
-    sudo service ssh start
-    passwd
-    ```
-
-    Change the password to something secure.
-
-1.  Copy the Check-ins Electron app to the Raspberry Pi and extract it:
-
-    ```
-    scp dist/planning-center-check-ins-*-armv7l.tar.xz pi@raspberry.local:~/
-    ssh pi@raspberry.local "tar xJf planning-center-check-ins-*-armv7l.tar.xz && mv planning-center-check-ins-*-armv7l planning-center-check-ins"
-    ```
-
-1.  On the Raspberry Pi, run the Electron app at:
-
-    ```
-    /home/pi/planning-center-check-ins/planning-center-check-ins
-    ```
-
-    ...and create a new station.
-
-1.  Install some prerequisites for the printer agent:
+1.  Install some prerequisites:
 
     ```
     sudo apt update
     sudo apt install build-essential openssl ruby-dev libssl-dev cups printer-driver-dymo ttf-mscorefonts-installer
-    sudo gpasswd -a pi lpadmin
     ```
+
+1.  Allow your user account to manage printers with cups:
+
+    ```
+    sudo gpasswd -a USERNAME lpadmin
+    ```
+
+    Replace `USERNAME` above with your user, e.g. `pi` if running on Raspbian.
 
 1.  Add the printer via the Cups admin page:
 
     http://localhost:631/
 
-1.  Copy this repo to the Raspberry Pi.
-
 1.  Bundle:
 
     ```
     sudo gem install bundler
-    cd check-ins-rpi-printer
+    cd dymo-printer-agent
     bundle
     ```
 
 1.  Start the printer agent:
 
     ```
-    cd check-ins-rpi-printer
+    cd dymo-printer-agent
     ruby agent.rb
     ```
 
-1.  Set the software to auto-start:
+1.  There is currently a bug in the Dymo printer driver that causes long delays in between printing each label.
+    In another terminal, start the `dymo_speed.rb` script to work around this issue:
 
     ```
-    echo '@/home/pi/check-ins-rpi-printer/start_station.sh' >> ~/.config/lxsession/LXDE-pi/autostart
-    echo '@/home/pi/check-ins-rpi-printer/start_printer_agent.sh' >> ~/.config/lxsession/LXDE-pi/autostart
-    echo '@ruby /home/pi/check-ins-rpi-printer/dymo_speed.rb' >> ~/.config/lxsession/LXDE-pi/autostart
+    cd dymo-printer-agent
+    ruby dymo_speed.rb
     ```
+
+### Running on a Raspberry Pi
+
+My specific use-case for this script was to run it on a Raspberry Pi running Raspbian. I wanted the script
+to auto-start upon boot of the Raspberry Pi. The following commands will set that up:
+
+```
+echo '@/home/pi/dymo-printer-agent/start_in_lxterminal.sh' >> ~/.config/lxsession/LXDE-pi/autostart
+echo '@ruby /home/pi/dymo-printer-agent/dymo_speed.rb' >> ~/.config/lxsession/LXDE-pi/autostart
+```
+
+## License
+
+Copyright Tim Morgan
+
+Licensed under the 2-clause BSD license (see the LICENSE file in this repo)
