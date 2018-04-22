@@ -49,6 +49,15 @@ _These instructions should work on Debian and Ubuntu._
     sudo apt install build-essential openssl ruby-dev libssl-dev cups printer-driver-dymo ttf-mscorefonts-installer
     ```
 
+1.  Add the Tahoma font, which seems to be Dymo's default:
+
+    ```
+    cd /tmp
+    wget https://sourceforge.net/projects/corefonts/files/OldFiles/IELPKTH.CAB
+    cabextract -F 'tahoma.ttf' IELPKTH.CAB
+    sudo mv tahoma.ttf /usr/share/fonts/truetype/msttcorefonts/Tahoma.ttf
+    ```
+
 1.  Allow your user account to manage printers with cups:
 
     ```
