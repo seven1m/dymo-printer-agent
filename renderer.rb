@@ -70,6 +70,7 @@ class Renderer
     name = text_object.css('Name').first
     name &&= name.text
     elements = text_object.css('StyledText Element')
+    return if elements.empty?
     font = elements.first.css('Attributes Font').first
     font_family = font ? font.attributes['Family'].value : 'Helvetica'
     size = font.attributes['Size'].value.to_i
