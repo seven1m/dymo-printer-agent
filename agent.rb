@@ -78,7 +78,8 @@ post '/DYMO/DLS/Printing/PrintLabel' do
     File.write(path, result)
 
     orientation = renderer.orientation
-    puts `lpr -P #{params[:printerName]} -o #{orientation} #{path}`
+    media = "Custom.#{renderer.paper_width}x#{renderer.paper_height}"
+    puts `lpr -P #{params[:printerName]} -o #{orientation} -o media=#{media} #{path}`
   end
   content_type 'application/json'
   headers 'Access-Control-Allow-Origin' => '*'

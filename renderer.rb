@@ -47,13 +47,23 @@ class Renderer
     end
   end
 
+  def paper_height
+    paper_size[0]
+  end
+
+  def paper_width
+    paper_size[1]
+  end
+
   private
 
   attr_reader :doc, :pdf
 
   def paper_size
-    elm = doc.css('PaperName').first
-    elm && SIZES[elm.text] || SIZES.values.first
+    @paper_size ||= begin
+      elm = doc.css('PaperName').first
+      elm && SIZES[elm.text] || SIZES.values.first
+    end
   end
 
   def build_pdf
