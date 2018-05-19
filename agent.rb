@@ -79,7 +79,8 @@ post '/DYMO/DLS/Printing/PrintLabel' do
 
     orientation = renderer.orientation
     media = "Custom.#{renderer.paper_width}x#{renderer.paper_height}"
-    puts `lpr -P #{params[:printerName]} -o #{orientation} -o media=#{media} #{path}`
+    graphics_opt = " -o Resolution=300x600dpi -o DymoPrintQuality=Graphics" if renderer.has_graphics?
+    puts `lpr -P #{params[:printerName]} -o #{orientation} -o media=#{media} #{graphics_opt} #{path}`
   end
   content_type 'application/json'
   headers 'Access-Control-Allow-Origin' => '*'

@@ -39,6 +39,10 @@ class Renderer
     pdf.render
   end
 
+  def has_graphics?
+    !doc.css('BarcodeObject').empty?
+  end
+
   def orientation
     if doc.css('PaperOrientation').first&.text == 'Landscape'
       'landscape'
