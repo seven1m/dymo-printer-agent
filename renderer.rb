@@ -6,7 +6,14 @@ require 'barby/barcode/qr_code'
 require 'barby/outputter/prawn_outputter'
 
 class Renderer
-  FONT_DIR = RUBY_PLATFORM =~ /darwin/ ? '/Library/Fonts' : '/usr/share/fonts/truetype/msttcorefonts'
+  FONT_DIRS_MACOS = [
+    "#{ENV["HOME"]}/Library/Fonts",
+    "/Library/Fonts",
+    "/Network/Library/Fonts",
+    "/System/Library/Fonts",
+  ].freeze
+
+  FONT_DIRS_LINUX = ['/usr/share/fonts/truetype/msttcorefonts'].freeze
 
   # 1440 twips per inch (20 per PDF point)
   TWIP = 1440.0
@@ -57,6 +64,21 @@ class Renderer
 
   def paper_width
     paper_size[1]
+  end
+
+  def self.font_file_for_family(family)
+    dir_list = RUBY_PLATFORM =~ /darwin/ ? FONT_DIRS_MACOS : FONT_DIRS_LINUX
+
+    extensions = [".ttf", ".dfont", ".ttc"]
+    names = extensions.map { |ext| [family, ext].join }
+
+    dir_list.each do |dir|
+      names.each do |filename|
+        file = File.join(dir, filename)
+        return file if File.exists?(file)
+      end
+    end
+    nil # not found
   end
 
   private
@@ -115,7 +137,7 @@ class Renderer
     valign = valign_from_text_object(text_object)
     begin
       pdf.fill_color color
-      pdf.font File.join(FONT_DIR, font_family + '.ttf')
+      pdf.font self.class.font_file_for_family(font_family)
       # horizontal padding of 1 point
       x += 1
       width -= 2
