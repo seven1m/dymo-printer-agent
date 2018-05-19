@@ -12,7 +12,8 @@ class Renderer
 
   # TODO: add more label sizes here
   SIZES = {
-    '30252 Address' => [252, 81]
+    '30252 Address' => [252, 81],
+    '30330 Return Address' => [144.1, 54],
   }.freeze
 
   # This may be needed for some label types. Zero for now.
