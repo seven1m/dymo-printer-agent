@@ -14,6 +14,7 @@ class Renderer
   SIZES = {
     '30252 Address' => [252, 81],
     '30330 Return Address' => [144.1, 54],
+    '30334 2-1/4 in x 1-1/4 in' => [162, 90],
   }.freeze
 
   # This may be needed for some label types. Zero for now.
