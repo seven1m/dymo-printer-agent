@@ -48,18 +48,21 @@ class Renderer
     @pdf = Prawn::Document.new(page_size: paper_size, margin: [0, 0, 0, 0])
   end
 
-  def render_object(object)
-    bounds = object.css('Bounds').first.attributes
+  def render_object(object_info)
+    bounds = object_info.css('Bounds').first.attributes
     x = ((bounds['X'].value.to_i / TWIP) - LEFT_MARGIN) * PDF_POINT
     y = paper_size.last - (bounds['Y'].value.to_i / TWIP * PDF_POINT)
     width = ((bounds['Width'].value.to_i / TWIP) - LEFT_MARGIN) * PDF_POINT
     height = bounds['Height'].value.to_i / TWIP * PDF_POINT
-    if (text_object = object.css('TextObject').first)
-      render_text_object(text_object, x, y, width, height)
-    elsif (shape_object = object.css('ShapeObject').first)
-      render_shape_object(shape_object, x, y, width, height)
+
+    object = object_info.children.find(&:element?)
+    case object.name
+    when 'TextObject'
+      render_text_object(object, x, y, width, height)
+    when 'ShapeObject'
+      render_shape_object(object, x, y, width, height)
     else
-      puts 'unsupported object type'
+      puts "unsupported object type: #{object&.name}"
     end
   end
 
