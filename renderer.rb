@@ -39,6 +39,14 @@ class Renderer
     pdf.render
   end
 
+  def orientation
+    if doc.css('PaperOrientation').first&.text == 'Landscape'
+      'landscape'
+    else
+      'portrait'
+    end
+  end
+
   private
 
   attr_reader :doc, :pdf
