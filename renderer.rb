@@ -1,5 +1,9 @@
 require 'prawn'
 require 'nokogiri'
+require 'barby'
+require 'barby/barcode/code_128'
+require 'barby/barcode/qr_code'
+require 'barby/outputter/prawn_outputter'
 
 class Renderer
   FONT_DIR = RUBY_PLATFORM =~ /darwin/ ? '/Library/Fonts' : '/usr/share/fonts/truetype/msttcorefonts'
@@ -61,6 +65,8 @@ class Renderer
       render_text_object(object, x, y, width, height)
     when 'ShapeObject'
       render_shape_object(object, x, y, width, height)
+    when 'BarcodeObject'
+      render_barcode_object(object, x, y, width, height)
     else
       puts "unsupported object type: #{object&.name}"
     end
@@ -177,6 +183,18 @@ class Renderer
       pdf.stroke
     else
       puts 'unknown shape type'
+    end
+  end
+
+  def render_barcode_object(barcode_object, x, y, width, height)
+    case barcode_type = barcode_object.css('Type').first.text
+    when 'QRCode'
+      content = barcode_object.css('Text').first.text
+      code = Barby::QrCode.new(content, level: :l)
+      outputter = Barby::PrawnOutputter.new(code)
+      doc = outputter.annotate_pdf(pdf, { x: x, y: y - height, size: 1 })
+    else
+      puts "unknown barcode type: #{barcode_type}"
     end
   end
 end
