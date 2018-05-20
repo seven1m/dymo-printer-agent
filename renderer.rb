@@ -236,7 +236,10 @@ class Renderer
       content = barcode_object.css('Text').first.text
       code = Barby::QrCode.new(content, level: :l)
       outputter = Barby::PrawnOutputter.new(code)
-      doc = outputter.annotate_pdf(pdf, { x: x, y: y - height, size: 1 })
+      min_dim = [width, height].min
+      max_dim = [width, height].max
+      dim = min_dim.to_f / max_dim
+      doc = outputter.annotate_pdf(pdf, { x: x, y: y - height, xdim: dim, ydim: dim })
     else
       puts "unknown barcode type: #{barcode_type}"
     end
