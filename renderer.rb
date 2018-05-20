@@ -137,7 +137,8 @@ class Renderer
     valign = valign_from_text_object(text_object)
     begin
       pdf.fill_color color
-      pdf.font self.class.font_file_for_family(font_family)
+      font_file = self.class.font_file_for_family(font_family)
+      pdf.font(font_file || raise("missing font #{font_family}"))
       # horizontal padding of 1 point
       x += 1
       width -= 2
