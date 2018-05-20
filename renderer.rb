@@ -237,10 +237,22 @@ class Renderer
       content = barcode_object.css('Text').first.text
       code = Barby::QrCode.new(content, level: :l)
       outputter = Barby::PrawnOutputter.new(code)
-      min_dim = [width, height].min
-      max_dim = [width, height].max
-      dim = min_dim.to_f / max_dim
-      doc = outputter.annotate_pdf(pdf, { x: x, y: y - height, xdim: dim, ydim: dim })
+      num_dots = outputter.full_width # number of dots in QR
+
+      xdim = width.to_f / num_dots
+      ydim = height.to_f / num_dots
+      dim = [xdim, ydim].min
+
+      # If the resulting size in either dimension is smaller than that
+      # dimension's specified size, adjust so the code is centered in the
+      # bounding box.
+      xadjust = (width - dim * num_dots).to_f / 2
+      yadjust = (height - dim * num_dots).to_f / 2
+
+      xpos = x + xadjust
+      ypos = y - height + yadjust
+
+      outputter.annotate_pdf(pdf, { x: xpos, y: ypos, xdim: dim, ydim: dim });
     else
       puts "unknown barcode type: #{barcode_type}"
     end
