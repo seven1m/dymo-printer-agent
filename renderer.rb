@@ -253,8 +253,37 @@ class Renderer
       ypos = y - height + yadjust
 
       outputter.annotate_pdf(pdf, { x: xpos, y: ypos, xdim: dim, ydim: dim });
+    when 'Code128Auto'
+      render_barcode_code128(barcode_object, x, y, width, height, nil)
+    when 'Code128A', 'Code128B', 'Code128C'
+      type = barcode_type.sub('Code128', '')
+      render_barcode_code128(barcode_object, x, y, width, height, type)
     else
       puts "unknown barcode type: #{barcode_type}"
     end
+  end
+
+  def render_barcode_code128(barcode_object, x, y, width, height, type)
+    content = barcode_object.css('Text').first.text
+    code = Barby::Code128.new(content, type)
+    outputter = Barby::PrawnOutputter.new(code)
+
+    num_dots_x = outputter.full_width
+    xdim = width.to_f / num_dots_x
+    center_x = x + width.to_f / 2
+
+    # ensure mandatory 10 module widths of space on left and right of barcode:
+    # https://en.wikipedia.org/wiki/Code_128#Quiet_zone
+    max_code_width = width - 20 * xdim
+    if (num_dots_x * xdim) > max_code_width
+      width = max_code_width
+      xdim = max_code_width / num_dots_x
+    end
+
+    # center in the x direction
+    xpos = center_x - width.to_f / 2
+    ypos = y - height
+
+    outputter.annotate_pdf(pdf, { x: xpos, y: ypos, xdim: xdim, height: height });
   end
 end
