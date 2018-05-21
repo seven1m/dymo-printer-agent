@@ -155,8 +155,6 @@ class Renderer
         disable_wrap_by_char: true,
         single_line: !verticalized
       )
-      # correct vertical alignment to more closely match Dymo -- this gets us close, but not perfect :-(
-      box.at[1] -= 2 + (actual_size * 0.2) unless valign == :center
       # on bottom-aligned boxes, Dymo counts the height of character descenders
       box.at[1] += box.descender if valign == :bottom
       box.render
