@@ -19,6 +19,7 @@ sent directly to the Dymo print driver.
 
 ### What Doesn't Work, Yet (Pull Requests Welcome!)
 
+* Barcodes
 * Rotated text
 * Other shapes
 * Alpha transparency on background colors
