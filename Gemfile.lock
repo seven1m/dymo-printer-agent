@@ -12,13 +12,13 @@ GEM
     prawn (2.2.2)
       pdf-core (~> 0.7.0)
       ttfunk (~> 1.5)
-    rack (2.0.4)
-    rack-protection (2.0.1)
+    rack (2.0.5)
+    rack-protection (2.0.3)
       rack
-    sinatra (2.0.1)
+    sinatra (2.0.3)
       mustermann (~> 1.0)
       rack (~> 2.0)
-      rack-protection (= 2.0.1)
+      rack-protection (= 2.0.3)
       tilt (~> 2.0)
     thin (1.7.2)
       daemons (~> 1.0, >= 1.0.9)
@@ -38,4 +38,4 @@ DEPENDENCIES
   thin
 
 BUNDLED WITH
-   1.16.1
+   1.16.2
