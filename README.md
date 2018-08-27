@@ -75,6 +75,8 @@ _These instructions should work on Debian and Ubuntu._
 
     ```
     sudo gem install bundler
+    cd
+    git clone https://github.com/seven1m/dymo-printer-agent.git
     cd dymo-printer-agent
     bundle
     ```
