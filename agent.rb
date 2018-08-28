@@ -75,7 +75,6 @@ end
 
 post '/DYMO/DLS/Printing/PrintLabel' do
   label_xml = params[:labelXml]
-  puts label_xml
   details = Nokogiri::XML(params[:labelSetXml])
   details.css('LabelRecord').each do |label|
     record_params = Hash[label.css('ObjectData').map { |d| [d.attributes['Name'].value, d.text] }]
