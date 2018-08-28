@@ -3,7 +3,7 @@ require 'sinatra'
 require 'thin'
 require 'builder'
 require 'nokogiri'
-require_relative './renderer'
+require 'dymo_render'
 
 class MyThinBackend < ::Thin::Backends::TcpServer
   def initialize(host, port, options)
@@ -11,6 +11,12 @@ class MyThinBackend < ::Thin::Backends::TcpServer
     @ssl = true
     @ssl_options = options
   end
+end
+
+def render_options
+  {
+    fallback_font: ENV['FALLBACK_FONT']
+  }
 end
 
 configure do
@@ -31,7 +37,7 @@ configure do
 end
 
 get '/' do
-  'it works!'
+  'dymo-printer-agent is running!'
 end
 
 get '/DYMO/DLS/Printing/StatusConnected' do
@@ -69,16 +75,17 @@ end
 
 post '/DYMO/DLS/Printing/PrintLabel' do
   label_xml = params[:labelXml]
+  puts label_xml
   details = Nokogiri::XML(params[:labelSetXml])
   details.css('LabelRecord').each do |label|
     record_params = Hash[label.css('ObjectData').map { |d| [d.attributes['Name'].value, d.text] }]
-    renderer = Renderer.new(xml: label_xml, params: record_params)
+    renderer = DymoRender.new(xml: label_xml, params: record_params, options: render_options)
     result = renderer.render
     path = File.expand_path('out.pdf', __dir__)
     File.write(path, result)
 
     orientation = renderer.orientation
-    media = "Custom.#{renderer.paper_width}x#{renderer.paper_height}"
+    media = "Custom.#{renderer.pdf_width}x#{renderer.pdf_height}"
     graphics_opt = " -o Resolution=300x600dpi -o DymoPrintQuality=Graphics" if renderer.has_graphics?
     puts `lpr -P #{params[:printerName]} -o #{orientation} -o media=#{media} #{graphics_opt} #{path}`
   end
