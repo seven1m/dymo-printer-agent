@@ -72,10 +72,15 @@ post '/DYMO/DLS/Printing/PrintLabel' do
   details = Nokogiri::XML(params[:labelSetXml])
   details.css('LabelRecord').each do |label|
     record_params = Hash[label.css('ObjectData').map { |d| [d.attributes['Name'].value, d.text] }]
-    result = Renderer.new(xml: label_xml, params: record_params).render
+    renderer = Renderer.new(xml: label_xml, params: record_params)
+    result = renderer.render
     path = File.expand_path('out.pdf', __dir__)
     File.write(path, result)
-    puts `lpr -P #{params[:printerName]} #{path}`
+
+    orientation = renderer.orientation
+    media = "Custom.#{renderer.paper_width}x#{renderer.paper_height}"
+    graphics_opt = " -o Resolution=300x600dpi -o DymoPrintQuality=Graphics" if renderer.has_graphics?
+    puts `lpr -P #{params[:printerName]} -o #{orientation} -o media=#{media} #{graphics_opt} #{path}`
   end
   content_type 'application/json'
   headers 'Access-Control-Allow-Origin' => '*'
