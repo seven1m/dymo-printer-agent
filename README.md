@@ -112,6 +112,27 @@ echo '@/home/pi/dymo-printer-agent/start_in_lxterminal.sh' >> ~/.config/lxsessio
 echo '@ruby /home/pi/dymo-printer-agent/dymo_speed.rb' >> ~/.config/lxsession/LXDE-pi/autostart
 ```
 
+### How to use - request methods:
+
+#### HTTP GET /DYMO/DLS/Printing/StatusConnected:
+ - Returns true if printer is connected
+
+#### HTTP GET /DYMO/DLS/Printing/GetPrinters:
+ - Returns a list of printers that can be found
+
+#### HTTP GET /DYMO/DLS/Printing/GetPrinters:
+ - Returns a list of printers that can be found
+
+#### HTTP POST /DYMO/DLS/Printing/PrintLabel:
+ - 
+
+#### HTTP POST /DYMO/DLS/Printing/PrintSingleLabel:
+ - Renders XML Label as PDF and sends to Dymo Printer
+
+##### Accepts parameters:
+    - labelXml: _the entire XML for the label_
+
+
 ## License
 
 Copyright Tim Morgan
