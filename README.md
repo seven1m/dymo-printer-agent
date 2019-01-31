@@ -124,7 +124,11 @@ echo '@ruby /home/pi/dymo-printer-agent/dymo_speed.rb' >> ~/.config/lxsession/LX
  - Returns a list of printers that can be found
 
 #### HTTP POST /DYMO/DLS/Printing/PrintLabel:
- - 
+ - .....
+
+ ##### Accepts parameters:
+    - labelXml: .....
+    - labeSetXML: .....
 
 #### HTTP POST /DYMO/DLS/Printing/PrintSingleLabel:
  - Renders XML Label as PDF and sends to Dymo Printer
