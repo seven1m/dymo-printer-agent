@@ -51,8 +51,10 @@ _These instructions should work on Debian and Ubuntu._
 
     ```
     sudo apt update
-    sudo apt install build-essential openssl ruby-dev libssl-dev cups printer-driver-dymo ttf-mscorefonts-installer
+    sudo apt install build-essential openssl ruby-dev libssl-dev cups cups-bsd printer-driver-dymo ttf-mscorefonts-installer
     ```
+
+    Note: we want `cups-bsd` to provide `lpr` -- do **not** install the `lpr` package!
 
 1.  Add the Tahoma font, which seems to be Dymo's default:
 
