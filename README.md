@@ -12,7 +12,7 @@ sent directly to the Dymo print driver.
 
 **You would not normally be writing the XML yourself. Instead, you should build your label
 in the Dymo software and interface with the API using the
-[Dymo SDK JavaScript Library](http://www.labelwriter.com/software/dls/sdk/js/DYMO.Label.Framework.2.0.2.js).**
+[Dymo SDK JavaScript Library](http://developers.dymo.com/2018/05/29/updated-js-sdk-and-dls/).**
 
 ### What Works
 
