@@ -10,6 +10,10 @@ This app sets up a small web server on port 41951 and accepts POST requests with
 The XML is interpretted, albeit not perfectly, and rendered to PDF, which is then
 sent directly to the Dymo print driver.
 
+**You would not normally be writing the XML yourself. Instead, you should build your label
+in the Dymo software and interface with the API using the
+[Dymo SDK JavaScript Library](http://www.labelwriter.com/software/dls/sdk/js/DYMO.Label.Framework.2.0.2.js).**
+
 ### What Works
 
 * Basic text and auto-shrinking text
