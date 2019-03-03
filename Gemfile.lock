@@ -1,24 +1,14 @@
-GIT
-  remote: git://github.com/seven1m/dymo_render.git
-  revision: ffbbb496feeb362b45f0f78acb85bfbc1049b462
-  specs:
-    dymo_render (0.0.6)
-      barby (~> 0.6)
-      nokogiri (~> 1.8)
-      prawn (~> 2.2)
-      rqrcode (~> 0.10)
-
 GEM
   remote: https://rubygems.org/
   specs:
-    barby (0.6.6)
+    barby (0.6.5)
     builder (3.2.3)
     chunky_png (1.3.10)
     daemons (1.2.6)
     eventmachine (1.2.5)
     mini_portile2 (2.3.0)
     mustermann (1.0.2)
-    nokogiri (1.8.4)
+    nokogiri (1.8.2)
       mini_portile2 (~> 2.3.0)
     pdf-core (0.7.0)
     prawn (2.2.2)
@@ -45,9 +35,11 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  barby
   builder
-  dymo_render!
   nokogiri
+  prawn
+  rqrcode
   sinatra
   thin
 

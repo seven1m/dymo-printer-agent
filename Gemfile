@@ -1,7 +1,9 @@
 source 'https://rubygems.org'
 
+gem 'barby'
 gem 'builder'
-gem 'dymo_render', github: 'seven1m/dymo_render'
 gem 'nokogiri'
+gem 'prawn'
+gem 'rqrcode'
 gem 'sinatra'
 gem 'thin'

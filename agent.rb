@@ -3,7 +3,7 @@ require 'sinatra'
 require 'thin'
 require 'builder'
 require 'nokogiri'
-require 'dymo_render'
+require_relative './renderer'
 
 class MyThinBackend < ::Thin::Backends::TcpServer
   def initialize(host, port, options)
@@ -11,12 +11,6 @@ class MyThinBackend < ::Thin::Backends::TcpServer
     @ssl = true
     @ssl_options = options
   end
-end
-
-def render_options
-  {
-    fallback_font: ENV['FALLBACK_FONT']
-  }
 end
 
 configure do
@@ -78,7 +72,7 @@ post '/DYMO/DLS/Printing/PrintLabel' do
   details = Nokogiri::XML(params[:labelSetXml])
   details.css('LabelRecord').each do |label|
     record_params = Hash[label.css('ObjectData').map { |d| [d.attributes['Name'].value, d.text] }]
-    renderer = DymoRender.new(xml: label_xml, params: record_params, options: render_options)
+    renderer = Renderer.new(xml: label_xml, params: record_params)
     result = renderer.render
     path = File.expand_path('out.pdf', __dir__)
     File.write(path, result)
