@@ -20,10 +20,10 @@ in the Dymo software and interface with the API using the
 * Text box solid background colors
 * Horizontal lines
 * "Verticalized" text
+* Barcodes
 
 ### What Doesn't Work, Yet (Pull Requests Welcome!)
 
-* Barcodes
 * Rotated text
 * Other shapes
 * Alpha transparency on background colors
