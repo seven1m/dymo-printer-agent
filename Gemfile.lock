@@ -8,7 +8,7 @@ GEM
     eventmachine (1.2.7)
     mini_portile2 (2.4.0)
     mustermann (1.0.3)
-    nokogiri (1.10.7)
+    nokogiri (1.10.8)
       mini_portile2 (~> 2.4.0)
     pdf-core (0.7.0)
     prawn (2.2.2)
