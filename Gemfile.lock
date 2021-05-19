@@ -16,7 +16,7 @@ GEM
       pdf-core (~> 0.7.0)
       ttfunk (~> 1.5)
     racc (1.5.2)
-    rack (2.0.8)
+    rack (2.2.3)
     rack-protection (2.0.7)
       rack
     rqrcode (1.1.2)
